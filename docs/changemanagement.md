@@ -1,7 +1,7 @@
-## Changemanagement
+# Changemanagement
 
-### National
+## National
 Geregelt in Gesetzen, Verordnungen und Weisungen des Bundes resp. der Swisstopo. Es wird dazu nicht näher eingegangen.
 
-### Kantonal
+## Kantonal
 Feedback, Änderungswünsche und Weiterentwicklungsideen zum ÖREB-Kataster werden im Ticketsystem des AGI resp. bei der direkt betroffenen Softwarekomponente verwaltet. Deren Umsetzungen werden durch die Amtsleitung geplant und freigegeben. Grössere Anpassungen werden als Projekt behandelt.

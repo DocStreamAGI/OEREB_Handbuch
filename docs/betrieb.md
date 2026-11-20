@@ -1,9 +1,9 @@
-## Betrieb
+# Betrieb
 
 Das Amt für Geoinformation ist der Betreiber der ÖREB-Kataster-Infrastruktur und seinen verschiedenen Komponenten. Die IT-Grundinfrastruktur (Netzwerk, Storage, virtuelle Server, OpenShift-Infrastruktur) wird vom Amt für Informatik und Organisation (AIO) bereitgestellt und betrieben. Controlling- und Vorgabestelle ist das AGI in Zusammenarbeit mit dem AIO (§5 Abs. 1 GeoIV). Die Vorgaben zur Abnahme des Systems sind im Abnahmeprotokoll (Dokument «ÖREB-Kataster - Abnahmeprotokoll zur Systemabnahme») enthalten.
 
-### Durchführung und Überwachung des Betriebs
-#### Service-, Reaktionszeiten und Verfügbarkeiten
+## Durchführung und Überwachung des Betriebs
+### Service-, Reaktionszeiten und Verfügbarkeiten
 Die Servicezeit ist der Zeitraum, während dem die vertraglich vereinbarte Verfügbarkeit der Leistung sichergestellt und ausgewiesen wird. Sie ist Basis für die Verfügbarkeitsmessung. Die Systeme stehen grundsätzlich auch ausserhalb der definierten Servicezeiten zur Verfügung (Betriebszeit 7 x 24 Stunden), jedoch ohne Gewährleistung der Verfügbarkeiten (vgl. unten).
 
 Servicezeit: Montag bis Freitag, 07:00 – 12:00 und 13:00 – 17:30 Uhr, allgemeine Feiertage werden wie Sonntage behandelt.
@@ -16,7 +16,7 @@ Die Störungsbehebungszeit bezeichnet die Zeitdauer während der Servicezeit zwi
 
 Störungsbehebungszeit: 16 Stunden
 
-#### Betriebsüberwachung mit Monitoring, Alarmierung etc.
+### Betriebsüberwachung mit Monitoring, Alarmierung etc.
 Die Überwachung des Betriebs des ÖREB-Katasters erfolgt auf unterschiedlichen Stufen:
 
 Das AIO überwacht den Betrieb des _OpenShift_-Clusters in dem sämtliche vom AGI betriebenen ÖREB-Kataster-Komponenten (mit Ausnahme der Datenbank) deployed sind. Die ÖREB-Kataster-Komponenten werden vom AGI mit _OpenShift_-Bordmitteln überwacht (Live- und Readynesstests, Selfhealing, etc.). Zusätzlich wird mit [_Statuscake_](https://www.statuscake.com/) ein Uptime- und Performancemonitoring betrieben. Fehler werden per E-Mail an die entsprechenden Personen mitgeteilt.
@@ -25,23 +25,23 @@ Die ÖREB-Datenbank wird nicht in _OpenShift_ betrieben, sondern im bestehenden 
 
 Störungsmeldungen bei den Daten-Integrationsprozessen werden der zuständigen Stellen und dem AGI per E-Mail mitgeteilt.
 
-#### Datensicherung
+### Datensicherung
 Die Geobasisdaten der kantonalen ÖREB-Themen sind in der kantonalen GDI abgelegt und werden entsprechend durch bereits vorhandene Prozesse jeden Tag gesichert. Die Dokumente auf dem Filesystem werden durch übergeordnete Backupprozesse des AIO gesichert.
 
 Jede Datenintegration in den ÖREB-Kataster geschieht mittels Rahmenmodell. Diese INTERLIS-Transferdatei wird archiviert.
 
-#### Kontrolle zum Datenschutz
+### Kontrolle zum Datenschutz
 Die Geobasisdaten der ÖREB-Katasterthemen enthalten ausschliesslich nicht-sensitive Sachdaten und unterliegen deshalb nicht dem Datenschutz.
 
 Die Rechtsvorschriften werden ohne sensible Daten publiziert. Die entsprechende Bearbeitung der Rechtsvorschriften liegt in der Verantwortung der zuständigen Stelle.
 
-#### Statistiken, Kennzahlen und Messgrössen
+### Statistiken, Kennzahlen und Messgrössen
 Die Katasterabfragen (dynamischer Auszug) und die PDF-Katasterauszüge über den Web GIS Client werden mit [_Matomo_](https://matomo.org/) protokolliert und können ausgewertet werden. Die Logdateien des API-Gateway werden zudem mittels [_logit.io_](https://logit.io/) ausgewertet. Diese Auswertungen (_Matomo_ und _logit.io_) dienen als Grundlage für die Berichterstattung zuhanden der Katasteraufsicht und für die Tätigkeitsberichte der kantonalen Verwaltung.
 
-#### Vorgehen im bei Datenfehler (inkl. organisatorische Aspekte wie Kommunikation etc.)
+### Vorgehen im bei Datenfehler (inkl. organisatorische Aspekte wie Kommunikation etc.)
 Fehler in den Geobasisdaten und Rechtsvorschriften, welche der KVS gemeldet werden, werden der zuständigen Stelle zur Korrektur gemeldet. Die Fehler sind je nach Art so schnell wie möglich zu beheben.
 
-### Ausfall und Wiederherstellung des Betriebs
+## Ausfall und Wiederherstellung des Betriebs
 Durch den Betrieb der meisten Komponenten in _OpenShift_ werden diese automatisch selber neu gestartet. Falls das «Selfhealing» nicht funktioniert und bei der klassisch betriebenen ÖREB-Datenbank wird innerhalb von 30 Minuten nach Eingang der Meldung die Anwendung neu gestartet.
 
 Ausgenommen davon ist die Bereitstellung der ÖREB-Daten des Bundes. In diesem Fall ist die Behebung durch die zuständige Stelle beim Bund abzuwarten.

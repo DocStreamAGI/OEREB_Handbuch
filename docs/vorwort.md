@@ -1,4 +1,4 @@
-## Vorwort
+# Vorwort
 
 Das ÖREB-Kataster-Handbuch des Kantons Solothurn dient der Organisation und Koordination der verschiedenen Abläufe des ÖREB-Katasters. Vertiefte (technische) Informationen zu den einzelnen Komponenten finden sich immer in den jeweiligen Github-Repositories.
 

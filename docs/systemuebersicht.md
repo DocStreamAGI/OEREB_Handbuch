@@ -1,16 +1,16 @@
-## Systemübersicht
+# Systemübersicht
 
-### Architektur
+## Architektur
 Die Architektur des ÖREB-Katasters wird im «Infrastruktur- und Betriebskonzept» (Version 1.0 vom 28. Januar 2019) vertieft erläutert.
 
 <a id="oereb-architektur"></a>
-.Architektur ÖREB-Kataster
+*Architektur ÖREB-Kataster *
 ![oereb-architektur](images/oereb-system-architektur-v03-Page-1.png)
 Bestehende GDI-Komponenten sind blau, ÖREB-Komponenten lachsfarben. Der Web GIS Client und die Datenablage müssten korrekterweise beide Farben aufweisen.
 
 Vorhandene kantonale Daten werden in der Edit-DB in einem dafür vorgesehenen Schema (`<amt>_<thema>_oerebv2`) in eine dem Rahmenmodell (Teilmodell Transferstruktur) äquivalente Struktur gebracht und anschliessend exportiert und in die ÖREB-DB importiert. Daten aus Fachanwendungen (Kataster der belasteten Standorten) und Bundesdaten werden direkt in die ÖREB-DB importiert, da sie bereits im Rahmenmodell bereitgestellt werden. Ein Datenumbau entfällt. Sämtliche Daten (inkl. amtliche Vermessung, Konfigurationsdaten, ...) werden in das gleiche Schema importiert. Es werden zwei identische Schemen erstellt: _live_ und _stage_. Das _stage_-Schema dient der Validierung der Daten durch die dafür zuständigen Stellen. Ist diese erfolgreich, werden die Daten in das _live_-Schema importiert.
 
-### Komponenten
+## Komponenten
 Der ÖREB-Kataster des Kantons Solothurn besteht aus den folgenden Komponenten:
 
 * ÖREB-Datenbank
@@ -24,7 +24,7 @@ Der ÖREB-Kataster des Kantons Solothurn besteht aus den folgenden Komponenten:
 
 Nicht speziell aufgelistet sind die verschiedenen Arbeits-Datenbank-Schemen in der Edit-DB, die zur Herstellung der Daten im INTERLIS-Rahmenmodell benötigt werden. Dazu wird im Kapitel [datenintegration](integrationsprozesse.md#datenintegration) näher eingegangen. [_GRETL-Jenkins_](https://gretl.so.ch/), das zur Steuerung der GRETL-Jobs verwendet wird, wird ebenfalls nicht in diesem Handbuch detailliert behandelt und beschrieben, da es sich um eine Standardkomponente der GDI handelt.
 
-#### ÖREB-Datenbank
+### ÖREB-Datenbank
 Code-Repository:\
 [https://github.com/sogis/oereb-db](https://github.com/sogis/oereb-db)
 
@@ -45,7 +45,7 @@ Im produktiven Betrieb wird nicht das Docker-Image verwendet, sondern die DDL-Qu
 
 Benutzernamen und Passwörter der DB-Benutzer werden durch Setzen der Umgebungsvariablen `PG_USER`, `PG_PASSWORD`, `PG_WRITE_USER`, `PG_WRITE_PASSWORD`, `PG_READ_USER` und `PG_READ_PASSWORD` definiert. Das Passwort für den DB-Benutzer `postgres` wird durch die Umgebungsvariable `PG_ROOT_PASSWORD` gesetzt.
 
-#### ÖREB-WMS
+### ÖREB-WMS
 Code-Repository:\
 [https://github.com/sogis/oereb-wms](https://github.com/sogis/oereb-wms)
 
@@ -67,7 +67,7 @@ Nach jedem Commit wird mit einer Github Action das Image neu gebuildet und inner
 
 Es wird QGIS 3.16 LTR eingesetzt. Das Dockerimage für die ARM64-Architektur verwendet QGIS 3.10 LTR aus dem offiziellen Ubuntu-Repository.
 
-#### ÖREB-Webservice
+### ÖREB-Webservice
 Code-Repository:\
 [https://github.com/claeis/oereb-web-service](https://github.com/claeis/oereb-web-service)\
 [https://github.com/sogis/oereb-web-service-docker](https://github.com/sogis/oereb-web-service-docker)
@@ -85,7 +85,7 @@ Alle benötigten Daten müssen in einem einzigen Schema in einer PostgreSQL-Date
 
 Jeder Commit im Code-Repository stösst einen Build-Prozess des Docker-Image-Repositories an. Das Docker-Image wird anschliessend automatisch in der [Test- und Integrationsumgebung](https://console.apps.ocp.so.ch/k8s/cluster/projects/agi-oerebv2-test) von _OpenShift_ deployed.
 
-#### ÖREB-Iconizer
+### ÖREB-Iconizer
 Code-Repository:\
 [https://github.com/sogis/oereb-iconizer](https://github.com/sogis/oereb-iconizer)
 
@@ -93,13 +93,13 @@ Der _ÖREB-Iconizer_ ist ein Java-Programm, das zum Herstellen der einzelnen ÖR
 
 Die Befehle für die Herstellung der INTERLIS-Transferdatei sind im Github-Repository beschrieben.
 
-#### ÖREB GRETL-Jobs
+### ÖREB GRETL-Jobs
 Code-Repository: +
 [https://github.com/sogis/oereb-gretljobs](https://github.com/sogis/oereb-gretljobs)
 
 Die ÖREB-GRETL-Jobs werden für den Datenfluss eingesetzt. Dazu gehören der Umbau der Daten in der Edit-DB, der Export in das Rahmenmodell, die Prüfung der INTERLIS-Transferdatei und der Import in die ÖREB-Datenbank. Daten, die bereits im Rahmenmodell vorliegen, müssen nur noch geprüft und in die ÖREB-Datenbank importiert werden.
 
-#### Web GIS Client Werkzeug «Grundstücksinformation»
+### Web GIS Client Werkzeug «Grundstücksinformation»
 Service: +
 [https://github.com/qwc-services/](https://github.com/qwc-services/)
 
@@ -108,13 +108,13 @@ Frontend: +
 
 Das Werkzeug ist ein Bestandteil des Web GIS Client und hat eigene Konfigurationensparameter. Diese Werkzeug ruft den ÖREB-Auszug (XML oder PDF) für das betroffene Grundstück auf und stellt den WMS zum passenden ÖREB-Katasterthema im Kartenfenster dar.
 
-#### Dokumentenablage
+### Dokumentenablage
 Dokumentenablage: +
 [https://geo.so.ch/docs/ch.so.arp.zonenplaene/Zonenplaene_pdf/](https://geo.so.ch/docs/ch.so.arp.zonenplaene/Zonenplaene_pdf/)
 
 Für die Ablage und das Bereitstellen sämtlicher Dokumente wird die bestehende Lösung des AGI verwendet: Sie besteht aus einem klassischen Filesystem, das in die verschiedenen Desktop- und Serverumgebungen eingebunden werden kann und von den berechtigten Benutzern verwendet werden kann. Dieses Filesystem wird mittels API-Gateway (_nginx_ Webserver) als HTTP-Ressource exponiert.
 
-### Systemumgebungen (Technisches Staging)
+## Systemumgebungen (Technisches Staging)
 Es stehen drei vollständige Systemumgebungung zur Verfügung:
 
 * Test: Zum Testen neuer Funktionen und Bugfixes. Jeder Commit in einer Software-Komponente stösst die Build-Pipeline an (Github Action). Ist der Build und das Testing erfolgreich, wird die Komponente nach maximal 15 Minuten neu deployed und steht dem Benutzer zur Verfügung.
