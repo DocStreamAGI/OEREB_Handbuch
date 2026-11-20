@@ -102,6 +102,9 @@ def migrate():
                 return "](" + target.replace(".adoc", ".md") + ")"
             return m.group(0)
         rendered = LINK.sub(fix_link, rendered)
+        # Separate Markdown pages start at H1, not the H2 used in the book.
+        rendered = re.sub(r"(?m)^(#{2,6})(\s+)", lambda m: m.group(1)[1:] + m.group(2), rendered)
+        rendered = re.sub(r"(?m)^\.([A-ZÄÖÜ][^\n]+)$", r"*\1*", rendered)
         rendered = "\n".join(line.rstrip() for line in rendered.splitlines()).rstrip() + "\n"
         dest.write_text(rendered, encoding="utf-8")
 
