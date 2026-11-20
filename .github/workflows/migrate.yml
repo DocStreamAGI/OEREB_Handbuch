@@ -1,0 +1,35 @@
+name: ÖREB – AsciiDoc nach Markdown
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/migrate.py
+      - .github/workflows/migrate.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Convert source and validate local links
+        run: python scripts/migrate.py
+      - name: Commit generated documentation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs LICENSE migration-report.json
+          git diff --cached --check
+          if ! git diff --cached --quiet; then
+            git commit -m "ÖREB-Handbuch: AsciiDoc nach Markdown konvertiert"
+            git push origin HEAD:main
+          fi
