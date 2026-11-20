@@ -120,7 +120,7 @@ def migrate():
                 r"(!\[[^\]\n]*\]\(images/" + re.escape(image_name) + r"\))"
             )
             rendered, replaced = caption_line.subn(
-                lambda m: m.group(1) + "\n\n*Abbildung: " + caption + "*",
+                lambda m: m.group(1) + "\n\n*Abbildung: " + caption + "*\n",
                 rendered,
             )
             if replaced != 1:
