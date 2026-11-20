@@ -7,6 +7,7 @@ Die Architektur des ÖREB-Katasters wird im «Infrastruktur- und Betriebskonzept
 ![oereb-architektur](images/oereb-system-architektur-v03-Page-1.png)
 
 *Abbildung: Architektur ÖREB-Kataster*
+
 Bestehende GDI-Komponenten sind blau, ÖREB-Komponenten lachsfarben. Der Web GIS Client und die Datenablage müssten korrekterweise beide Farben aufweisen.
 
 Vorhandene kantonale Daten werden in der Edit-DB in einem dafür vorgesehenen Schema (`<amt>_<thema>_oerebv2`) in eine dem Rahmenmodell (Teilmodell Transferstruktur) äquivalente Struktur gebracht und anschliessend exportiert und in die ÖREB-DB importiert. Daten aus Fachanwendungen (Kataster der belasteten Standorten) und Bundesdaten werden direkt in die ÖREB-DB importiert, da sie bereits im Rahmenmodell bereitgestellt werden. Ein Datenumbau entfällt. Sämtliche Daten (inkl. amtliche Vermessung, Konfigurationsdaten, ...) werden in das gleiche Schema importiert. Es werden zwei identische Schemen erstellt: _live_ und _stage_. Das _stage_-Schema dient der Validierung der Daten durch die dafür zuständigen Stellen. Ist diese erfolgreich, werden die Daten in das _live_-Schema importiert.
