@@ -105,6 +105,29 @@ def migrate():
         # Separate Markdown pages start at H1, not the H2 used in the book.
         rendered = re.sub(r"(?m)^(#{2,6})(\s+)", lambda m: m.group(1)[1:] + m.group(2), rendered)
         rendered = re.sub(r"(?m)^\.([A-ZÄÖÜ][^\n]+)$", r"*\1*", rendered)
+        # Restore AsciiDoc figure captions below their images. downdoc
+        # otherwise renders the original .Caption line above the image.
+        source_text = f.read_text(encoding="utf-8-sig")
+        figures = re.findall(
+            r"(?m)^\.([^\n]+?)\s*\nimage::([^\[\n]+)\[[^\]]*\]",
+            source_text,
+        )
+        for raw_caption, raw_image_name in figures:
+            caption = raw_caption.strip()
+            image_name = Path(raw_image_name.strip()).name
+            caption_line = re.compile(
+                r"(?m)^\*" + re.escape(caption) + r"\s*\*\s*\n"
+                r"(!\[[^\]\n]*\]\(images/" + re.escape(image_name) + r"\))"
+            )
+            rendered, replaced = caption_line.subn(
+                lambda m: m.group(1) + "\n\n*Abbildung: " + caption + "*",
+                rendered,
+            )
+            if replaced != 1:
+                raise RuntimeError(
+                    "AsciiDoc image caption could not be restored: "
+                    + f.name + " -> " + caption
+                )
         rendered = "\n".join(line.rstrip() for line in rendered.splitlines()).rstrip() + "\n"
         dest.write_text(rendered, encoding="utf-8")
 
