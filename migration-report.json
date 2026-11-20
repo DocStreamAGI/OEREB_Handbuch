@@ -1,0 +1,45 @@
+{
+  "source": "https://github.com/sogis/oereb-handbuch.git",
+  "branch": "master",
+  "source_commit": "fcecfdf47e0cfd5212819458e1af8b913e87c9f8",
+  "converter": "npx downdoc (analog Modellierungsrichtlinien)",
+  "chapters": [
+    {
+      "title": "Vorwort",
+      "original": "src/docs/asciidoc/chapter/vorwort.adoc",
+      "markdown": "docs/vorwort.md"
+    },
+    {
+      "title": "Organisation",
+      "original": "src/docs/asciidoc/chapter/organisation.adoc",
+      "markdown": "docs/organisation.md"
+    },
+    {
+      "title": "Systemübersicht",
+      "original": "src/docs/asciidoc/chapter/systemuebersicht.adoc",
+      "markdown": "docs/systemuebersicht.md"
+    },
+    {
+      "title": "Betrieb",
+      "original": "src/docs/asciidoc/chapter/betrieb.adoc",
+      "markdown": "docs/betrieb.md"
+    },
+    {
+      "title": "Integrationsprozesse",
+      "original": "src/docs/asciidoc/chapter/integrationsprozesse.adoc",
+      "markdown": "docs/integrationsprozesse.md"
+    },
+    {
+      "title": "Changemanagement",
+      "original": "src/docs/asciidoc/chapter/changemanagement.adoc",
+      "markdown": "docs/changemanagement.md"
+    }
+  ],
+  "not_in_master": [
+    "src/docs/asciidoc/chapter/entwicklung.adoc",
+    "src/docs/asciidoc/chapter/fragen.adoc"
+  ],
+  "broken_relative_links": [],
+  "warnings": [],
+  "requires_editorial_review": true
+}

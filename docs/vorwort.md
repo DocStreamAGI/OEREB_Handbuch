@@ -1,0 +1,10 @@
+## Vorwort
+
+Das ÖREB-Kataster-Handbuch des Kantons Solothurn dient der Organisation und Koordination der verschiedenen Abläufe des ÖREB-Katasters. Vertiefte (technische) Informationen zu den einzelnen Komponenten finden sich immer in den jeweiligen Github-Repositories.
+
+Zum besseren Verständnis dienen folgende Dokumente:
+
+* ÖREB-Kataster V2.0: «Infrastruktur- und Betriebskonzept» (Version 1.0 vom 12. Januar 2022)
+* ÖREB-Kataster V2.0: «Neue Themen» (Version 1.3 vom 28. Februar 2022)
+* ÖREB-Kataster V1.0: «Infrastruktur- und Betriebskonzept» (Version 1.0 vom 28. Januar 2019)
+* ÖREB-Kataster V1.0: «Konzept Ersterfassung, Aufbereitung und Nachführung der ÖREB-Daten» (Version 1.0 vom 28. Januar 2019)
