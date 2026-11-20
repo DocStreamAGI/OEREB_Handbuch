@@ -71,6 +71,25 @@ def migrate():
             notices.append("Unknown image: " + f.name + " -> " + target)
             return m.group(0)
         rendered = IMAGE.sub(fix_image, rendered)
+        # downdoc leaves some AsciiDoc directives untouched: translate them
+        # explicitly instead of publishing broken image/anchor syntax.
+        def raw_image(m):
+            name, alt = m.group(1), m.group(2).split(",", 1)[0]
+            if not (docs / "images" / name).is_file():
+                notices.append("Unknown AsciiDoc image: " + f.name + " -> " + name)
+            return "![" + (alt or name) + "](images/" + name + ")"
+        rendered = re.sub(r"(?m)^image::([^\[\s]+)\[([^\]]*)\]\s*$", raw_image, rendered)
+        rendered = re.sub(r"(?m)^\[#([\w.-]+)\]\s*$", r'<a id="\1"></a>', rendered)
+        def raw_xref(m):
+            anchor = m.group(1).lstrip("#")
+            label = (m.group(2) or anchor).strip()
+            owner = anchors.get(anchor)
+            if not owner:
+                notices.append("Unknown cross-reference: " + f.name + " -> " + anchor)
+                return m.group(0)
+            href = ("#" if owner == f.stem else owner + ".md#") + anchor
+            return "[" + label + "](" + href + ")"
+        rendered = re.sub(r"<<#?([\w.-]+)(?:,([^>]*))?>>", raw_xref, rendered)
         # Convert cross-chapter anchor links to stable Markdown files.
         def fix_link(m):
             target = m.group(1).strip()
@@ -83,7 +102,8 @@ def migrate():
                 return "](" + target.replace(".adoc", ".md") + ")"
             return m.group(0)
         rendered = LINK.sub(fix_link, rendered)
-        dest.write_text(rendered.rstrip() + "\n", encoding="utf-8")
+        rendered = "\n".join(line.rstrip() for line in rendered.splitlines()).rstrip() + "\n"
+        dest.write_text(rendered, encoding="utf-8")
 
     index = ["# ÖREB-Kataster: Handbuch", "", "## Inhaltsverzeichnis", ""]
     index += ["- [" + title + "](" + f.stem + ".md)" for f, title in chapters]
